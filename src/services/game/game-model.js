@@ -15,6 +15,7 @@ const playerSchema = new Schema({
 const cardSchema = new Schema({
   image: { type: string, required: true },
   flipped: {type: Boolean, required: true, 'default': false}
+  picked: {type: Boolean, required: true, 'default': false}
   red: {type: Boolean, required: true},
   grey: {type: Boolean, required: true},
   black: {type: Boolean, required: true},
