@@ -1,43 +1,41 @@
-// src/services/recipe/recipe-model.js
-
 'use strict';
 
-// recipe-model.js - A mongoose model
-//
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ingredientSchema = new Schema({
-  amount: { type: String, required: false },
+const playerSchema = new Schema({
+  userId: { type: Schema.Types.ObjectId, ref: 'user' },
   name: { type: String, required: true },
-  optional: { type: Boolean, required: true, 'default': false }
+  turn: { type: Boolean, required: true, 'default': false }
 });
 
-const cookingStepSchema = new Schema({
-  cookingTime: { type: Number, required: false }, // in minutes
-  title: { type: String, required: false },
-  description: { type: String, required: true }
+const cardSchema = new Schema({
+  image: { type: string, required: true },
+  flipped: {type: Boolean, required: true, 'default': false}
+  red: {type: Boolean, required: true},
+  grey: {type: Boolean, required: true},
+  black: {type: Boolean, required: true},
+  glass: {type: Boolean, required: true},
+  glasses: {type: Boolean, required: true},
+  tongue: {type: Boolean, required: true},
+  bow: {type: Boolean, required: true},
+  hat: {type: Boolean, required: true}
 });
 
-const recipeSchema = new Schema({
-  title: { type: String, required: true },
-  summary: { type: String, required: true },
-  photo: { type: String, required: true },
-  vegan: { type: Boolean, required: true, 'default': false },
-  vegetarian: { type: Boolean, required: true, 'default': false },
-  pescatarian: { type: Boolean, required: true, 'default': false },
-  cookingTime: { type: Number, required: false }, // in minutes
-  ingredients: [ingredientSchema],
-  cookingSteps: [cookingStepSchema],
-  likedBy: [ Schema.Types.ObjectId ],
-  authorId: { type: Schema.Types.ObjectId, ref: 'user' },
+const gameSchema = new Schema({
+  players: [playerSchema],
+  cards: [cardSchema],
+  started: { type: Boolean, required: true, 'default': false },
+  winner: { type: String, required: true, 'default': 'you Won!' },
+  turn: { type: number, required: true, 'default': 0 },
   createdAt: { type: Date, 'default': Date.now },
-  updatedAt: { type: Date, 'default': Date.now }
+  updatedAt: { type: Date, 'default': Date.now },
+  userId: { type: Schema.Types.ObjectId, ref: 'user' },
 });
 
-const recipeModel = mongoose.model('recipe', recipeSchema);
+const gameModel = mongoose.model('game', gameSchema);
 
-module.exports = recipeModel;
+module.exports = gameModel;
