@@ -13,9 +13,9 @@ const playerSchema = new Schema({
 });
 
 const cardSchema = new Schema({
-  image: { type: string, required: true },
-  flipped: {type: Boolean, required: true, 'default': false}
-  picked: {type: Boolean, required: true, 'default': false}
+  image: { type: String, required: true },
+  flipped: {type: Boolean, required: true, 'default': false},
+  picked: {type: Boolean, required: true, 'default': false},
   red: {type: Boolean, required: true},
   grey: {type: Boolean, required: true},
   black: {type: Boolean, required: true},
@@ -31,7 +31,7 @@ const gameSchema = new Schema({
   cards: [cardSchema],
   started: { type: Boolean, required: true, 'default': false },
   winner: { type: String, required: true, 'default': 'you Won!' },
-  turn: { type: number, required: true, 'default': 0 },
+  turn: { type: Number, required: true, 'default': 0 },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now },
   userId: { type: Schema.Types.ObjectId, ref: 'user' },
